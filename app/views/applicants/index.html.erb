@@ -1,53 +1,45 @@
+<table>
+  <thead>
 
-
-  <% @jobs.each do |i| %>
-
-  <div class = "container">
-  <div class = "row borders2">
-      <div class = "col-sm-1 span wrp border_rt">
-      <%= i.name %>
-      </div>
-
-      
-
-    <% @applicants.each do |applicant| %>
-
-    <% if applicant.job_id == i.id %>
-        <div class = "row eqWrap borders2">
-            <div class = "col-sm-1 borders2 wrp">
-            <%= applicant.name %>
-            </div>
-
-            <div class = "col-sm-2 borders2 wrp">
-            <a href="mailto:<%= applicant.email %>"a><%= applicant.email %></a>
-            </div>
-
-            <div class = "col-sm-2 borders2 wrp">
-            <a href=<%= applicant.website %>><%= applicant.website %></a>
-            </div>
-
-            <div class = "col-sm-2 borders2">
+  <tr>
+    <th>Job</th>
+    <th>Applicant Name</th>
+    <th>Email Address</th>
+    <th>Website</th>
+    <th>Skills</th>
+    <th>Cover Letter Paragraph</th>
+  </tr>
+</thead>
+<tbody>
+    <% @jobs.each do |i| %>
+    <tr>
+      <td rowspan="4" class = "job"><%= i.name %></td>
+        <% @applicants.each do |applicant| %>
+          <% if applicant.job_id == i.id %>
+          <td><%= applicant.name %></td>
+          <td><a href="mailto:<%= applicant.email %>"a><%= applicant.email %></a></td>
+          <td><a href=<%= applicant.website %>><%= applicant.website %></a></td>
+          <td>
             <% @skills.each do |s| %>
               <% if s.applicant_id == applicant.id %>
-              <div class = "row borders2">
-                <%= s.name %>
-              </div>
-              <% end %>
-            <% end %>
-            </div>
+              <%= "#{s.name}" + "\n" %>
+              <%end%>
+            <%end%>
+          </td>
+          <td><%= applicant.cover_letter %></td>
+    </tr>
+          <%end%>
+        <%end%>
+    <%end%>
+</tbody>
 
-            <div class = "col-sm-5 borders3 wrp">
-            <%= applicant.cover_letter %>
-            </div>
-      </div>
-    <% end %>
-    <% end %>
+</table>
+<table class = "foot">
+      <tr COLSPAN = "20">
+    <td>
+    <%= "#{@appcount} Applicants and #{@skillcount} Unique Skills"%>
+    </td>
+    </tr>
+<table>
 
-
-<% end %>
-
-<div class = "col-sm-12 borders2"><%= "#{@appcount} Applicants and #{@skillcount} Unique Skills"%></div>
-  </div>
-  </div>
-
-
+  
