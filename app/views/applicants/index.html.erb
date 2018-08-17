@@ -1,0 +1,53 @@
+
+
+  <% @jobs.each do |i| %>
+
+  <div class = "container">
+  <div class = "row borders2">
+      <div class = "col-sm-1 span wrp border_rt">
+      <%= i.name %>
+      </div>
+
+      
+
+    <% @applicants.each do |applicant| %>
+
+    <% if applicant.job_id == i.id %>
+        <div class = "row eqWrap borders2">
+            <div class = "col-sm-1 borders2 wrp">
+            <%= applicant.name %>
+            </div>
+
+            <div class = "col-sm-2 borders2 wrp">
+            <a href="mailto:<%= applicant.email %>"a><%= applicant.email %></a>
+            </div>
+
+            <div class = "col-sm-2 borders2 wrp">
+            <a href=<%= applicant.website %>><%= applicant.website %></a>
+            </div>
+
+            <div class = "col-sm-2 borders2">
+            <% @skills.each do |s| %>
+              <% if s.applicant_id == applicant.id %>
+              <div class = "row borders2">
+                <%= s.name %>
+              </div>
+              <% end %>
+            <% end %>
+            </div>
+
+            <div class = "col-sm-5 borders3 wrp">
+            <%= applicant.cover_letter %>
+            </div>
+      </div>
+    <% end %>
+    <% end %>
+
+
+<% end %>
+
+<div class = "col-sm-12 borders2"><%= "#{@appcount} Applicants and #{@skillcount} Unique Skills"%></div>
+  </div>
+  </div>
+
+

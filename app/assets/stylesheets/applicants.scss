@@ -1,0 +1,45 @@
+
+div a{
+  color:blue;
+  text-decoration: underline;
+}
+
+
+.borders2{
+  outline: .5px solid black;
+
+}
+
+.borders3{
+  outline: 2px solid black;
+  padding: 0px 5px 5px 5px;
+  margin-left: 0px;
+}
+
+.container{
+  border: 1px solid black;
+
+}
+
+.span{
+    padding:10%;
+
+}
+
+.row{
+    overflow: hidden; 
+}
+
+.wrp {
+    overflow-wrap:break-word;
+
+}
+
+.eqWrap{
+  display: flex;
+}
+
+.marg{
+  padding: 200px;
+  }
+
