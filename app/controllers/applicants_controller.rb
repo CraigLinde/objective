@@ -6,7 +6,7 @@ class ApplicantsController < ApplicationController
   # GET /applicants.json
   def index
     @applicants = Applicant.all
-    @jobs = Job.all
+    @jobs = Job.order('name DESC').all
     @skills = Skill.all
 
     @appcount = 0
