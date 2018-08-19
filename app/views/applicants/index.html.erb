@@ -1,3 +1,5 @@
+
+
 <table>
   <thead>
 
@@ -10,10 +12,18 @@
     <th>Cover Letter Paragraph</th>
   </tr>
 </thead>
+<% @rowspan = []%>
+<% @jobs.each do |j| %>
+  <% @count = 0%>
+  <% @applicants.each do |a| %>
+    <%@count +=1 if j.id == a.job_id%>
+  <%end%>
+  <%@rowspan.push @count%>
+<%end%>
 <tbody>
     <% @jobs.each do |i| %>
     <tr>
-      <td rowspan="4" class = "job"><%= i.name %></td>
+      <td rowspan= <%= @rowspan[i.id - 1]%> class = "job"><%= i.name %></td>
         <% @applicants.each do |applicant| %>
           <% if applicant.job_id == i.id %>
           <td><%= applicant.name %></td>
@@ -22,7 +32,8 @@
           <td>
             <% @skills.each do |s| %>
               <% if s.applicant_id == applicant.id %>
-              <%= "#{s.name}" + "\n" %>
+              <%= s.name %>
+              <br>
               <%end%>
             <%end%>
           </td>
