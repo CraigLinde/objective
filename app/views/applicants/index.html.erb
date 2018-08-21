@@ -1,8 +1,6 @@
 
-
 <table>
-  <thead>
-
+<thead>
   <tr>
     <th>Job</th>
     <th>Applicant Name</th>
@@ -12,37 +10,30 @@
     <th>Cover Letter Paragraph</th>
   </tr>
 </thead>
-<% @rowspan = []%>
-<% @jobs.each do |j| %>
-  <% @count = 0%>
-  <% @applicants.each do |a| %>
-    <%@count +=1 if j.id == a.job_id%>
-  <%end%>
-  <%@rowspan.push @count%>
-<%end%>
+
 <tbody>
     <% @jobs.each do |i| %>
-    <tr>
-      <td rowspan= <%= @rowspan[i.id - 1]%> class = "job"><%= i.name %></td>
+    <% get_job_rowspan(i.id) %>
+    <tr> 
+      <td rowspan= <%= @rowspan %> class = "job"><%= i.name %></td>
         <% @applicants.each do |applicant| %>
           <% if applicant.job_id == i.id %>
-          <td><%= applicant.name %></td>
-          <td><a href="mailto:<%= applicant.email %>"a><%= applicant.email %></a></td>
-          <td><a href=<%= applicant.website %>><%= applicant.website %></a></td>
-          <td>
-            <% @skills.each do |s| %>
-              <% if s.applicant_id == applicant.id %>
-              <%= s.name %>
-              <br>
-              <%end%>
+            <% get_applicant_rowspan(applicant.id) %>
+            <td rowspan= <%= @skills_rowspan %>><%= applicant.name %></td>
+            <td rowspan= <%= @skills_rowspan %>><a href="mailto:<%= applicant.email %>"a><%= applicant.email %></a></td>
+            <td rowspan= <%= @skills_rowspan %>><a href=<%= applicant.website %>><%= applicant.website %></a></td>
+            <td><%= @first_row %></td>
+            <td rowspan= <%= @skills_rowspan %>><%= applicant.cover_letter %></td>
+            </tr>
+            <% if @extra_rows.any? %>
+                <% @extra_rows.each do |r| %>
+                  <tr><td><%= r %></td></tr>
+                <%end%>
             <%end%>
-          </td>
-          <td><%= applicant.cover_letter %></td>
-    </tr>
           <%end%>
         <%end%>
     <%end%>
-</tbody>
+</tbody
 
 </table>
 <table class = "foot">
